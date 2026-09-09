@@ -69,8 +69,14 @@ h1{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:500;let
 .avatar.lg{width:88px;height:88px;font-size:32px;}
 .avatar.blurred::after{content:'';position:absolute;inset:0;border-radius:50%;backdrop-filter:blur(7px);background:rgba(252,251,250,.25);z-index:2;}
 .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;}
-.work img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.work::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,26,38,0) 45%,rgba(36,26,38,.55) 100%);}
+.work{display:flex;}
+.ba{position:relative;flex:1;overflow:hidden;}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;}
+.ba.before img{filter:grayscale(.3) brightness(.88) contrast(.94);}
+.ba.after img{filter:brightness(1.09) saturate(1.14) contrast(1.02);}
+.ba.after{border-left:1.5px solid rgba(255,255,255,.85);}
+.batag{position:absolute;top:4px;left:4px;font-size:8px;font-weight:700;color:#fff;background:rgba(36,26,38,.6);padding:2px 6px;border-radius:99px;z-index:3;line-height:1.3;}
+.work::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,26,38,0) 55%,rgba(36,26,38,.6) 100%);pointer-events:none;}
 .work small{z-index:2;}
 .nname{font-family:var(--serif);font-size:18.5px;font-weight:500;letter-spacing:-.01em;}
 .ncred{font-size:12.5px;color:var(--muted);margin-top:1px;}
@@ -331,7 +337,14 @@ const nycPhotos = [
  "https://randomuser.me/api/portraits/women/74.jpg",
  "https://randomuser.me/api/portraits/women/62.jpg",
 ];
-const workImg = (i,j) => `https://picsum.photos/seed/p1work${i*3+j}/240/240`;
+/* client faces for before/after tiles; same face both sides, filters do the rest */
+const clientImg = (i,j) => `https://randomuser.me/api/portraits/women/${(i*7 + j*13 + 3) % 96}.jpg`;
+const baTile = (i,j,label,col,gradEnd) => `
+  <div class="work" style="background:linear-gradient(160deg,${col},${gradEnd})">
+    <div class="ba before"><img src="${clientImg(i,j)}" alt="" loading="lazy" onerror="this.remove()"><span class="batag">Before</span></div>
+    <div class="ba after"><img src="${clientImg(i,j)}" alt="" loading="lazy" onerror="this.remove()"><span class="batag">After</span></div>
+    <small>${label}</small>
+  </div>`;
 
 const modules = [
  "Facial anatomy and danger zones","Skin science and aging","Consultation and assessment","Photography and documentation",
@@ -376,7 +389,7 @@ grads.forEach((g,i)=>{
       ${yt?`<span class="yt">YT ${fmt(yt)}</span>`:''}
     </div>
     <div class="works">
-      ${labels.map((l,j)=>`<div class="work" style="background:linear-gradient(160deg,${workCols[j]},${grad[1]})"><img src="${workImg(i,j)}" alt="" loading="lazy" onerror="this.remove()"><small>${l}</small></div>`).join('')}
+      ${labels.map((l,j)=>baTile(i,j,l,workCols[j],grad[1])).join('')}
     </div>
     <div class="progrow">
       <svg class="ring" viewBox="0 0 38 38" aria-hidden="true">
@@ -466,7 +479,7 @@ function openProfile(i){
     <div class="p-sec">
       <h4>Recent work</h4>
       <div class="p-works">
-        ${labels.map((l,j)=>`<div class="work" style="background:linear-gradient(160deg,${workCols[j]},${grad[1]})"><img src="${workImg(i,j)}" alt="Work sample: ${l}" onerror="this.remove()"><small>${l}</small></div>`).join('')}
+        ${labels.map((l,j)=>baTile(i,j,l,workCols[j],grad[1])).join('')}
       </div>
     </div>
 
