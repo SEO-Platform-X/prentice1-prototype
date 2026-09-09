@@ -121,7 +121,15 @@ h1{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:500;let
 .igtop{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;gap:8px;}
 .ighandle{font-weight:600;color:var(--blush-deep);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .igfollow{color:var(--muted);font-weight:500;white-space:nowrap;}
-.igact{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--muted);}
+.igact{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);}
+.igid{display:flex;align-items:center;gap:7px;min-width:0;}
+.igava{width:24px;height:24px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.igthumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
+.igpost{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;display:block;background:linear-gradient(160deg,#E7DCE0,#C4A8B2);}
+.igpost img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.igpost::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(36,26,38,.5));}
+.igpost .lk{position:absolute;left:5px;bottom:4px;font-size:9.5px;color:#fff;font-weight:700;z-index:2;}
+.iggrid .igpost{border-radius:6px;}
 .dots{display:flex;gap:3px;}
 .dot{width:7px;height:7px;border-radius:2px;background:var(--line);}
 .dot.on{background:var(--blush-deep);}
@@ -148,7 +156,7 @@ h1{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:500;let
 .igstats{display:flex;gap:20px;font-size:13px;color:var(--muted);flex-wrap:wrap;}
 .igstats b{color:var(--ink);font-weight:600;}
 .iggrid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:11px;}
-.iggrid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;display:block;}
+
 .kolchips{display:flex;flex-wrap:wrap;gap:8px;}
 .kolchip{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:5px 14px 5px 6px;font-size:12.5px;}
 .kolchip img{width:28px;height:28px;border-radius:50%;object-fit:cover;}
@@ -157,7 +165,7 @@ h1{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:500;let
 @media(max-width:760px){.iggrid{grid-template-columns:repeat(3,1fr);}}
 
 /* ---------- person-first card elements ---------- */
-.photorow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.photorow{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;}
 .ph{aspect-ratio:3/4;border-radius:8px;position:relative;overflow:hidden;background:linear-gradient(160deg,#E7DCE0,#B99AA6);}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .ph::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(36,26,38,.55));pointer-events:none;}
@@ -445,6 +453,9 @@ const matchCount = i => 3 + (i % 4);
 const sfx = ['.injects','.aesthetics','.rn','.inj','.beauty'];
 const handle = (first,i) => '@'+first.toLowerCase()+sfx[i%5];
 const postsPerWk = i => 3 + (i % 5);
+const engOf = i => 4.2 + (i%4)*0.9;
+const fmtN = n => n>=1e6 ? (n/1e6).toFixed(1)+'m' : n>=1000 ? (n/1000).toFixed(1).replace('.0','')+'k' : ''+Math.round(n);
+const likesOf = (i,j,ig) => Math.round(ig*1000*engOf(i)/100*(0.7+((j*37+i*13)%50)/100));
 const actLabel = p => p>=6 ? 'Posts daily' : p>=4 ? 'Very active' : 'Active';
 
 /* culture, attributes, goals, availability (deterministic per nurse) */
@@ -518,18 +529,20 @@ grads.forEach((g,i)=>{
     </div>
     <div class="igsnap">
       <div class="igtop">
-        <span class="ighandle">${handle(first,i)}</span>
+        <span class="igid"><img class="igava" src="images/nurses/n${i}.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="ighandle">${handle(first,i)}</span></span>
         <span class="igfollow">IG ${fmt(ig)} · TT ${fmt(tk)}${yt?' · YT '+fmt(yt):''}</span>
+      </div>
+      <div class="igthumbs">
+        ${[0,1,2].map(j=>`<span class="igpost"><img src="images/clients/c${(i*3+j)%60}_after.jpg" alt="Recent post" loading="lazy" onerror="this.remove()"><span class="lk">♥ ${fmtN(likesOf(i,j,ig))}</span></span>`).join('')}
       </div>
       <div class="igact">
         <span class="dots" aria-hidden="true">${Array.from({length:7},(_,d)=>`<span class="dot ${d<postsPerWk(i)?'on':''}"></span>`).join('')}</span>
-        <span>${actLabel(postsPerWk(i))} · ${postsPerWk(i)} posts/wk</span>
+        <span>${actLabel(postsPerWk(i))} · ${postsPerWk(i)} posts/wk · ${engOf(i).toFixed(1)}% eng</span>
       </div>
     </div>
     <div class="photorow">
       <div class="ph"><img src="images/nurses/n${i}_hs.jpg" alt="${first} headshot" loading="lazy" onerror="this.remove()"><small>Headshot</small></div>
-      <div class="ph"><svg class="fig" viewBox="0 0 24 44" fill="rgba(61,36,64,.32)" aria-hidden="true"><circle cx="12" cy="5.5" r="4.2"/><path d="M7 13.5c1.4-1.5 8.6-1.5 10 0 1.2 1.3 1.6 4.6 1.4 7.5l-1.6 8h-1.6l-.8 13h-4.8l-.8-13H7.2l-1.6-8c-.2-2.9.2-6.2 1.4-7.5z"/></svg><small>Full body</small></div>
-      <div class="ph"><img src="images/clients/c${(i*3)%60}_after.jpg" alt="Top Instagram post" loading="lazy" onerror="this.remove()"><small>Top post</small></div>
+      <div class="ph"><img src="images/nurses/n${i}_body.jpg" alt="${first} body shot" loading="lazy" onerror="this.remove()"><small>Body shot</small></div>
     </div>
     <div class="vibewrap">
       <span class="arch">${archetypes[i%6][0]}</span>
@@ -642,11 +655,12 @@ function openProfile(i){
         <span><b>${handle(first,i)}</b></span>
         <span><b>${fmt(ig)}</b> IG followers</span>
         <span><b>${postsPerWk(i)}</b> posts/wk</span>
-        <span><b>${(4.2 + (i%4)*0.9).toFixed(1)}%</b> engagement</span>
+        <span><b>${86+(i*7)%160}</b> posts</span>
+        <span><b>${engOf(i).toFixed(1)}%</b> engagement</span>
         <span>${actLabel(postsPerWk(i))}</span>
       </div>
       <div class="iggrid">
-        ${Array.from({length:6},(_,j)=>`<img src="images/clients/c${(i*3+j)%60}_after.jpg" alt="Recent post" loading="lazy" onerror="this.remove()">`).join('')}
+        ${Array.from({length:6},(_,j)=>`<span class="igpost"><img src="images/clients/c${(i*3+j)%60}_after.jpg" alt="Recent post" loading="lazy" onerror="this.remove()"><span class="lk">♥ ${fmtN(likesOf(i,j,ig))}</span></span>`).join('')}
       </div>
     </div>
 
@@ -668,7 +682,7 @@ function openProfile(i){
       <h4>Photos</h4>
       <div class="bigphotos">
         <div class="ph"><img src="images/nurses/n${i}_hs.jpg" alt="${first} ${last} headshot" onerror="this.remove()"><small>Headshot</small></div>
-        <div class="ph"><svg class="fig" viewBox="0 0 24 44" fill="rgba(61,36,64,.32)" aria-hidden="true"><circle cx="12" cy="5.5" r="4.2"/><path d="M7 13.5c1.4-1.5 8.6-1.5 10 0 1.2 1.3 1.6 4.6 1.4 7.5l-1.6 8h-1.6l-.8 13h-4.8l-.8-13H7.2l-1.6-8c-.2-2.9.2-6.2 1.4-7.5z"/></svg><small>Full body</small></div>
+        <div class="ph"><img src="images/nurses/n${i}_body.jpg" alt="${first} ${last} body shot" onerror="this.remove()"><small>Body shot</small></div>
       </div>
     </div>
 
