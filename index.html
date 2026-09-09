@@ -300,8 +300,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 <div class="intro">
   <div class="wrap">
     <div class="intro-copy">
-      <h2>We accept the top 1% of nurses. Seven weeks later, they're placed.</h2>
-      <p>Six weeks of rigorous training, then one week of <b>bespoke placement</b> matching every graduate with practices.</p>
+      <h2>We accept the top 1% of candidates. Seven weeks later, they're placed.</h2>
+      <p>Six weeks of rigorous training, then one week of <b>bespoke placement</b> matching every graduate with practices. Open to <b>RNs, NPs, PAs, and MDs</b> making the switch.</p>
       <div class="trainrow">
         <span class="vtag">Online didactic</span>
         <span class="vtag">Live in-person immersion</span>
@@ -324,7 +324,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
     <div>
       <div class="cohort-eyebrow"><span class="livedot"></span>Cohort in session</div>
       <h1>Los Angeles, Cohort 04</h1>
-      <p class="cohort-sub">Twenty nurses from the top 1% of applicants, four weeks into the six week intensive. Follow their progress and place bids before the job fair.</p>
+      <p class="cohort-sub">Twenty candidates from the top 1% of applicants, four weeks into the six week intensive. Follow their progress and place bids before the job fair.</p>
     </div>
     <div class="datebox" role="group" aria-label="Cohort dates">
       <div class="datecell"><div class="lab">Started</div><div class="val">Aug 31</div></div>
@@ -385,7 +385,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 </footer>
 
 <!-- ========== PROFILE OVERLAY ========== -->
-<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Nurse profile">
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Candidate profile">
   <div class="scrim" onclick="closeProfile()"></div>
   <div class="sheet">
     <div class="sheet-in" id="sheetContent"></div>
@@ -397,14 +397,14 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 const grads = [
  ["Marisol","Vega","RN, BSN","UCLA Health, 4 yrs ICU",["#C2777E","#8A4A56"],48.2,12.1,null,19,96,3,["Lip filler","Tox map","Cheek"],["#D9A0A6","#B98A93","#C9A2AB"]],
  ["Dani","Okafor","RN","Cedars-Sinai, ER",["#3D2440","#6B4A72"],31.5,88.4,2.1,21,98,5,["Jawline","Lip filler","Chin"],["#B4909E","#A0788C","#C7A3B0"]],
- ["Priya","Shah","RN, BSN","Kaiser Permanente, Peds",["#5E7161","#3E4F42"],12.9,5.6,null,17,91,2,["Tox map","Under eye","Lip"],["#C8B2A6","#B39C90","#D2BDB1"]],
- ["Jules","Marchetti","RN","Providence, Med-Surg",["#8A5A44","#5F3E30"],76.0,140.2,8.4,22,99,7,["Lip filler","Profile","Tox"],["#D0A5A0","#BE938E","#C99E99"]],
+ ["Priya","Shah","NP","Kaiser Permanente, Peds",["#5E7161","#3E4F42"],12.9,5.6,null,17,91,2,["Tox map","Under eye","Lip"],["#C8B2A6","#B39C90","#D2BDB1"]],
+ ["Jules","Marchetti","PA-C","Providence, Med-Surg",["#8A5A44","#5F3E30"],76.0,140.2,8.4,22,99,7,["Lip filler","Profile","Tox"],["#D0A5A0","#BE938E","#C99E99"]],
  ["Aiyana","Reyes","RN, BSN","LAC+USC, Trauma",["#7A4A66","#54344A"],22.7,15.3,null,18,94,4,["Cheek","Lip filler","Nasolabial"],["#C9A0B4","#B58AA0","#D3ADC0"]],
  ["Sofia","Lindqvist","RN","Huntington Health",["#4A5E7A","#324158"],9.4,3.2,null,15,89,1,["Tox map","Brow lift","Lip"],["#A8B4C4","#94A2B4","#B6C0CE"]],
  ["Tunde","Adebayo","RN, MSN","VA Greater LA",["#2E4A44","#1F332F"],18.1,44.0,1.2,20,95,4,["Jawline","Chin","Tox"],["#9CB4AC","#88A198","#AABFB8"]],
  ["Camille","Duran","RN","St. John's, L&D",["#B4413E","#7E2D2B"],55.8,20.5,null,16,92,3,["Lip filler","Cheek","Under eye"],["#DCA9A2","#C79289","#E2B4AD"]],
- ["Hana","Kim","RN, BSN","City of Hope",["#6B5A8A","#4A3E60"],14.6,62.3,3.7,19,97,6,["Tox map","Lip filler","Jawline"],["#B6ACC9","#A296B8","#C4BBD4"]],
- ["Reina","Castillo","RN","Dignity Health",["#8A6A1F","#5F4A16"],38.9,9.8,null,14,88,2,["Brow lift","Lip","Tox"],["#D2BE93","#C0AB7E","#DCC9A2"]],
+ ["Hana","Kim","NP","City of Hope",["#6B5A8A","#4A3E60"],14.6,62.3,3.7,19,97,6,["Tox map","Lip filler","Jawline"],["#B6ACC9","#A296B8","#C4BBD4"]],
+ ["Reina","Castillo","PA-C","Dignity Health",["#8A6A1F","#5F4A16"],38.9,9.8,null,14,88,2,["Brow lift","Lip","Tox"],["#D2BE93","#C0AB7E","#DCC9A2"]],
  ["Amara","Nwosu","RN, BSN","Keck Medicine",["#44305E","#2E2140"],27.3,71.6,4.5,21,96,5,["Cheek","Lip filler","Profile"],["#AC9CC4","#9887B2","#BBAAD0"]],
  ["Noor","Haddad","RN","Torrance Memorial",["#5E4438","#3F2E26"],11.2,6.9,null,13,90,1,["Tox map","Lip","Chin"],["#C4AC9C","#B29886","#D0BBAC"]],
  ["Gabby","Torres","RN, BSN","MLK Community",["#7E3D5A","#57293E"],63.4,110.7,6.2,20,98,6,["Lip filler","Jawline","Tox"],["#D1A1B6","#BD8AA2","#DBAEC2"]],
@@ -412,7 +412,7 @@ const grads = [
  ["Bianca","Rossi","RN, BSN","Cedars-Sinai, PACU",["#A05A3E","#70402C"],44.1,33.8,2.9,18,93,4,["Cheek","Lip filler","Nasolabial"],["#DCAE9C","#C99A88","#E4BBAA"]],
  ["Imani","Brooks","RN","Harbor-UCLA",["#2E3E5E","#1F2B40"],19.5,52.0,3.1,17,95,3,["Tox map","Jawline","Lip"],["#9CACC8","#8898B6","#AABAD4"]],
  ["Lena","Petrov","RN, BSN","Hoag Hospital",["#6E4A2E","#4C331F"],15.8,4.7,null,16,91,2,["Lip filler","Brow lift","Tox"],["#C8B09C","#B69C86","#D4BEAC"]],
- ["Yasmin","Farah","RN","Olive View, ICU",["#4A2E44","#33202F"],29.6,80.2,5.5,19,97,5,["Profile","Lip filler","Chin"],["#B89CB4","#A488A0","#C6ACC2"]],
+ ["Yasmin","Farah","MD","Olive View, Internal Med",["#4A2E44","#33202F"],29.6,80.2,5.5,19,97,5,["Profile","Lip filler","Chin"],["#B89CB4","#A488A0","#C6ACC2"]],
  ["Talia","Goldberg","RN, BSN","Providence Tarzana",["#5A6E3E","#3E4C2A"],10.3,7.1,null,15,89,2,["Tox map","Under eye","Cheek"],["#B0C09C","#9CAC86","#BECCAC"]],
  ["Cleo","Mbeki","RN","Good Samaritan",["#803E4A","#582A33"],36.7,25.9,1.8,18,94,4,["Lip filler","Tox","Jawline"],["#D0A0AA","#BC8A96","#DAAEB8"]],
 ];
@@ -489,13 +489,13 @@ const modules = [
 ];
 
 const nycApps = [
- ["Alexis","B","#7A4A66","Brooklyn · 6 yrs ER","Accepted"],
- ["Morgan","T","#3D2440","Manhattan · 3 yrs ICU","Accepted"],
- ["Chelsea","R","#5E7161","Queens · L&D","Accepted"],
- ["Devon","K","#8A5A44","Jersey City · Med-Surg","In review"],
- ["Sam","O","#4A5E7A","Bronx · 8 yrs Peds","Accepted"],
- ["Nadia","F","#B4413E","Manhattan · PACU","In review"],
- ["Erika","M","#2E4A44","Long Island · Trauma","Accepted"],
+ ["Alexis","B","#7A4A66","RN · Brooklyn, 6 yrs ER","Accepted"],
+ ["Morgan","T","#3D2440","PA-C · Manhattan, 3 yrs ICU","Accepted"],
+ ["Chelsea","R","#5E7161","RN · Queens, L&D","Accepted"],
+ ["Devon","K","#8A5A44","NP · Jersey City, Med-Surg","In review"],
+ ["Sam","O","#4A5E7A","NP · Bronx, 8 yrs Peds","Accepted"],
+ ["Nadia","F","#B4413E","RN · Manhattan, PACU","In review"],
+ ["Erika","M","#2E4A44","MD · Long Island, Trauma","Accepted"],
 ];
 
 /* -------- render LA grid -------- */
@@ -602,7 +602,7 @@ function openProfile(i){
     ["2022","${BG}","Staff RN".replace('x','x')],
     ["2021","BLS, ACLS certified","American Heart Association"],
     ["2020","BSN, Nursing","California State University"],
-    ["2019","California RN license","Board of Registered Nursing, active"]
+    ["2019","Active California clinical license","Board verified"]
   ];
   cv[1] = ["2022", bg.split(',')[0], bg.split(',').slice(1).join(',').trim()+" · Staff RN"];
 
@@ -712,7 +712,7 @@ function openProfile(i){
       ${nurseMatches(i).map(m=>`
         <div class="matchitem">
           <span class="mdot" style="background:${m.p[2]}">${m.p[0][0]}</span>
-          <span class="matchname"><b>${m.p[0]}</b><span>${m.p[1]} · Hiring nurse injectors</span></span>
+          <span class="matchname"><b>${m.p[0]}</b><span>${m.p[1]} · Hiring injectors</span></span>
           <span class="matchpct">${m.pct}% match</span>
         </div>`).join('')}
     </div>
