@@ -107,13 +107,14 @@ h1{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:500;let
 .intro p{color:var(--muted);font-size:15px;max-width:480px;margin-top:12px;}
 .intro p b{color:var(--ink);font-weight:600;}
 .facts{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);}
-.fact{padding:16px 20px;min-width:126px;}
+.fact{padding:15px 16px;min-width:104px;}
 .fact + .fact{border-left:1px solid var(--line);}
-.fact .fv{font-family:var(--serif);font-size:24px;font-weight:500;}
-.fact .fl{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.3;max-width:110px;}
+.fact .fv{font-family:var(--serif);font-size:23px;font-weight:500;}
+.fact .fl{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.3;max-width:104px;}
 .fact.hot{background:var(--aubergine);color:#fff;}
 .fact.hot .fl{color:var(--blush);}
-@media(max-width:760px){.facts{width:100%;}.fact{flex:1;min-width:0;padding:12px 12px;}}
+.trainrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+@media(max-width:900px){.facts{width:100%;flex-wrap:wrap;}.fact{flex:1;min-width:45%;}.fact + .fact{border-left:none;}.fact:nth-child(even){border-left:1px solid var(--line);}.fact:nth-child(n+3){border-top:1px solid var(--line);}}
 
 /* ---------- IG snapshot on cards ---------- */
 .igsnap{border:1px solid var(--line);border-radius:10px;padding:8px 11px;display:flex;flex-direction:column;gap:6px;background:linear-gradient(135deg,#FFF,#FBF5F6);}
@@ -299,13 +300,20 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 <div class="intro">
   <div class="wrap">
     <div class="intro-copy">
-      <h2>We accept the top 1% of nurses. Six weeks later, they're hired.</h2>
-      <p>A rigorous application. A six week intensive taught by <b>famous KOLs</b>. A job fair where <b>practices bid on every graduate</b>. Application to placement, end to end, in six weeks.</p>
+      <h2>We accept the top 1% of nurses. Seven weeks later, they're placed.</h2>
+      <p>Six weeks of rigorous training, then one week of <b>bespoke placement</b> matching every graduate with practices.</p>
+      <div class="trainrow">
+        <span class="vtag">Online didactic</span>
+        <span class="vtag">Live in-person immersion</span>
+        <span class="vtag">Hands-on injection assessment</span>
+        <span class="vtag">Cadaver course</span>
+      </div>
     </div>
     <div class="facts" role="group" aria-label="Program facts">
       <div class="fact"><div class="fv">Top 1%</div><div class="fl">of applicants accepted</div></div>
-      <div class="fact"><div class="fv">6 weeks</div><div class="fl">of rigorous training</div></div>
-      <div class="fact hot"><div class="fv">6 weeks</div><div class="fl">to job placement, end to end</div></div>
+      <div class="fact"><div class="fv">6 wks</div><div class="fl">rigorous training</div></div>
+      <div class="fact"><div class="fv">1 wk</div><div class="fl">bespoke placement matching</div></div>
+      <div class="fact hot"><div class="fv">7 wks</div><div class="fl">end to end, start to career</div></div>
     </div>
   </div>
 </div>
@@ -321,7 +329,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
     <div class="datebox" role="group" aria-label="Cohort dates">
       <div class="datecell"><div class="lab">Started</div><div class="val">Aug 31</div></div>
       <div class="datecell"><div class="lab">Graduation</div><div class="val">Oct 9</div></div>
-      <div class="datecell hot"><div class="lab">Job fair &amp; bidding</div><div class="val">Oct 12</div></div>
+      <div class="datecell hot"><div class="lab">Placement week</div><div class="val">Oct 12</div></div>
     </div>
     <div class="cohort-meter">
       <span>Cohort progress</span>
@@ -711,7 +719,7 @@ function openProfile(i){
 
     <div class="bidpanel">
       <h4>Bid on ${first}</h4>
-      <p>Graduates Oct 9. Bidding opens to all verified employers at the Oct 12 job fair. Early bids are visible to the candidate now.</p>
+      <p>Graduates Oct 9. Bespoke placement week runs Oct 12 to 16, when matching and bidding open to all verified practices. Early bids are visible to the candidate now.</p>
       <div class="bidrow">
         <button class="btn">Place a bid</button>
         <button class="btn ghost">Message</button>
