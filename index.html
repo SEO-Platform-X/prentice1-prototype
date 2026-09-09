@@ -101,10 +101,19 @@ h1{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:500;let
 
 /* ---------- intro blurb ---------- */
 .intro{border-bottom:1px solid var(--line);background:linear-gradient(135deg,#FFF 30%,#F8F1F2 100%);}
-.intro .wrap{padding:30px 28px 28px;display:flex;gap:34px;align-items:center;flex-wrap:wrap;}
-.intro h2{font-family:var(--serif);font-size:clamp(21px,2.8vw,28px);font-weight:500;line-height:1.22;max-width:520px;letter-spacing:-.01em;}
-.intro p{color:var(--muted);font-size:14.5px;max-width:400px;}
+.intro .wrap{padding:38px 28px 34px;display:flex;gap:38px;align-items:center;flex-wrap:wrap;}
+.intro-copy{flex:1;min-width:300px;}
+.intro h2{font-family:var(--serif);font-size:clamp(26px,3.6vw,40px);font-weight:500;line-height:1.14;max-width:560px;letter-spacing:-.02em;}
+.intro p{color:var(--muted);font-size:15px;max-width:480px;margin-top:12px;}
 .intro p b{color:var(--ink);font-weight:600;}
+.facts{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);}
+.fact{padding:16px 20px;min-width:126px;}
+.fact + .fact{border-left:1px solid var(--line);}
+.fact .fv{font-family:var(--serif);font-size:24px;font-weight:500;}
+.fact .fl{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.3;max-width:110px;}
+.fact.hot{background:var(--aubergine);color:#fff;}
+.fact.hot .fl{color:var(--blush);}
+@media(max-width:760px){.facts{width:100%;}.fact{flex:1;min-width:0;padding:12px 12px;}}
 
 /* ---------- IG snapshot on cards ---------- */
 .igsnap{border:1px solid var(--line);border-radius:10px;padding:8px 11px;display:flex;flex-direction:column;gap:6px;background:linear-gradient(135deg,#FFF,#FBF5F6);}
@@ -289,8 +298,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
 <!-- ========== WHAT PRENTICE1 IS ========== -->
 <div class="intro">
   <div class="wrap">
-    <h2>Train to inject. Graduate with a portfolio. Get hired by bid.</h2>
-    <p>Prentice1 is the end to end pipeline for nurse injectors: <b>cohort training with famous KOLs</b>, a verified public portfolio, and <b>a job fair where practices bid</b> to hire every graduate.</p>
+    <div class="intro-copy">
+      <h2>We accept the top 1% of nurses. Six weeks later, they're hired.</h2>
+      <p>A rigorous application. A six week intensive taught by <b>famous KOLs</b>. A job fair where <b>practices bid on every graduate</b>. Application to placement, end to end, in six weeks.</p>
+    </div>
+    <div class="facts" role="group" aria-label="Program facts">
+      <div class="fact"><div class="fv">Top 1%</div><div class="fl">of applicants accepted</div></div>
+      <div class="fact"><div class="fv">6 weeks</div><div class="fl">of rigorous training</div></div>
+      <div class="fact hot"><div class="fv">6 weeks</div><div class="fl">to job placement, end to end</div></div>
+    </div>
   </div>
 </div>
 
@@ -300,12 +316,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
     <div>
       <div class="cohort-eyebrow"><span class="livedot"></span>Cohort in session</div>
       <h1>Los Angeles, Cohort 04</h1>
-      <p class="cohort-sub">Twenty registered nurses training in aesthetic injectables. Follow their work, watch their progress, and place bids before the job fair.</p>
+      <p class="cohort-sub">Twenty nurses from the top 1% of applicants, four weeks into the six week intensive. Follow their progress and place bids before the job fair.</p>
     </div>
     <div class="datebox" role="group" aria-label="Cohort dates">
-      <div class="datecell"><div class="lab">Started</div><div class="val">Jun 16</div></div>
-      <div class="datecell"><div class="lab">Graduation</div><div class="val">Oct 3</div></div>
-      <div class="datecell hot"><div class="lab">Job fair &amp; bidding</div><div class="val">Oct 10</div></div>
+      <div class="datecell"><div class="lab">Started</div><div class="val">Aug 31</div></div>
+      <div class="datecell"><div class="lab">Graduation</div><div class="val">Oct 9</div></div>
+      <div class="datecell hot"><div class="lab">Job fair &amp; bidding</div><div class="val">Oct 12</div></div>
     </div>
     <div class="cohort-meter">
       <span>Cohort progress</span>
@@ -325,7 +341,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
     <div>
       <div class="next-eyebrow">Enrolling now</div>
       <h1 style="font-size:clamp(28px,3.5vw,40px)">New York, Fall Cohort</h1>
-      <p class="cohort-sub">Classes begin November 4. Applicants are reviewed on licensure, portfolio, and audience. Names stay partially private until the cohort opens.</p>
+      <p class="cohort-sub">The six week intensive begins November 4. We accept the top 1% of applicants, reviewed on licensure, interview, and audience. Names stay partially private until the cohort opens.</p>
     </div>
     <div class="seatwrap">
       <div class="seatcount">7<small> / 20</small></div>
@@ -695,7 +711,7 @@ function openProfile(i){
 
     <div class="bidpanel">
       <h4>Bid on ${first}</h4>
-      <p>Graduates Oct 3. Bidding opens to all verified employers at the Oct 10 job fair. Early bids are visible to the candidate now.</p>
+      <p>Graduates Oct 9. Bidding opens to all verified employers at the Oct 12 job fair. Early bids are visible to the candidate now.</p>
       <div class="bidrow">
         <button class="btn">Place a bid</button>
         <button class="btn ghost">Message</button>
