@@ -146,6 +146,41 @@ h1{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:500;let
 .kolchip span{color:var(--muted);}
 @media(max-width:760px){.iggrid{grid-template-columns:repeat(3,1fr);}}
 
+/* ---------- person-first card elements ---------- */
+.photorow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.ph{aspect-ratio:3/4;border-radius:8px;position:relative;overflow:hidden;background:linear-gradient(160deg,#E7DCE0,#B99AA6);}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.ph::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(36,26,38,.55));pointer-events:none;}
+.ph small{position:absolute;left:6px;bottom:5px;font-size:9.5px;color:#fff;font-weight:600;z-index:2;text-shadow:0 1px 4px rgba(0,0,0,.35);}
+.ph .fig{position:absolute;left:26%;right:26%;top:12%;bottom:14%;}
+.vibewrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.arch{background:var(--aubergine);color:#fff;font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;}
+.vtag{border:1px solid var(--line);color:var(--muted);font-size:11px;padding:3px 10px;border-radius:99px;background:var(--card);}
+.attrs{display:flex;flex-direction:column;gap:6px;}
+.attr{display:flex;align-items:center;gap:8px;font-size:11.5px;}
+.attr .an{width:92px;color:var(--muted);flex-shrink:0;}
+.attr .abar{flex:1;height:5px;border-radius:99px;background:var(--line);overflow:hidden;}
+.attr .abar i{display:block;height:100%;background:linear-gradient(90deg,var(--blush),var(--blush-deep));border-radius:99px;}
+.attr .av{width:24px;text-align:right;font-weight:700;color:var(--ink);}
+.p-attrs .attr{font-size:13px;padding:3px 0;}
+.p-attrs .an{width:170px;}
+.p-attrs .abar{height:7px;}
+.metarow{display:flex;flex-wrap:wrap;gap:6px;}
+.mchip{font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;background:#F7EDEE;color:var(--blush-deep);}
+.mchip.ft{background:#EDF2ED;color:#3E5442;}
+.mchip.sh{background:#F2EFF3;color:var(--aubergine);}
+.archdesc{color:var(--muted);font-size:13.5px;margin-top:9px;max-width:520px;}
+.bigphotos{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:400px;}
+.bigphotos .ph{border-radius:12px;}
+.goalbox{border:1px solid var(--line);border-left:3px solid var(--blush-deep);background:var(--card);border-radius:12px;padding:14px 17px;}
+.goalbox b{font-family:var(--serif);font-size:17px;font-weight:500;display:block;margin-bottom:3px;}
+.goalbox span{color:var(--muted);font-size:13.5px;}
+.availgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.availbox{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:12px 15px;font-size:14px;}
+.availbox .lab{font-size:12px;color:var(--muted);margin-bottom:2px;}
+.availbox b{font-weight:600;}
+.availbox.hl{background:#F2EFF3;border-color:#D9CFE0;}
+
 /* section divider between cohorts */
 .divide{border:none;border-top:1px solid var(--line);margin:0;}
 
@@ -361,14 +396,7 @@ const grads = [
 /* portraits: AI-generated synthetic faces (public domain), hosted in this repo */
 const photos = Array.from({length:20},(_,i)=>`images/nurses/n${i}.jpg`);
 const nycPhotos = Array.from({length:7},(_,i)=>`images/applicants/a${i}.jpg`);
-/* client before/after pairs: same synthetic face, edits baked into the files */
-const clientIdx = (i,j) => (i*3+j) % 60;
-const baTile = (i,j,label,col,gradEnd) => `
-  <div class="work" style="background:linear-gradient(160deg,${col},${gradEnd})">
-    <div class="ba before"><img src="images/clients/c${clientIdx(i,j)}_before.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="batag">Before</span></div>
-    <div class="ba after"><img src="images/clients/c${clientIdx(i,j)}_after.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="batag">After</span></div>
-    <small>${label}</small>
-  </div>`;
+/* client faces reused as Instagram post thumbnails in the social grid */
 
 /* KOLs (fictional faculty), practices, and social handles */
 const kols = [
@@ -394,6 +422,38 @@ const sfx = ['.injects','.aesthetics','.rn','.inj','.beauty'];
 const handle = (first,i) => '@'+first.toLowerCase()+sfx[i%5];
 const postsPerWk = i => 3 + (i % 5);
 const actLabel = p => p>=6 ? 'Posts daily' : p>=4 ? 'Very active' : 'Active';
+
+/* culture, attributes, goals, availability (deterministic per nurse) */
+const archetypes = [
+ ["The Perfectionist","Measures twice, injects once. Happiest when the chart is spotless and the symmetry is exact."],
+ ["The Encourager","Clients leave feeling better about themselves before the swelling even settles. Natural at aftercare follow-ups."],
+ ["The Artist","Sees faces in thirds and golden ratios. Comes in with a strong aesthetic point of view and mood boards to prove it."],
+ ["The Clinician","Safety-first and protocol-fluent. The one you want in the room if anything ever goes sideways."],
+ ["The Closer","Natural in consults. Comfortable talking treatment plans, packages, and pricing without it feeling like sales."],
+ ["The Hustler","First in, last out. Will build a book of business faster than the front desk can schedule it."]
+];
+const vibePool = ["Warm","Detail-obsessed","Calm energy","High energy","Team-first","Self-starter","Coachable","Playful","Polished","Empathetic","Direct","Curious"];
+const vibesOf = i => [vibePool[(i*2)%12], vibePool[(i*2+3)%12], vibePool[(i*2+7)%12]];
+const attrsOf = i => ([
+ ["Moldability", 80 + ((i*7)%18)],
+ ["Bedside manner", 78 + ((i*5)%20)],
+ ["Attention to detail", 75 + ((i*11)%23)],
+ ["Consult & sales", 62 + ((i*13)%30)],
+ ["On-camera confidence", 70 + ((i*3)%28)],
+ ["Hustle", 72 + ((i*9)%26)]
+]);
+const goals = [
+ ["Join a luxury med spa","Wants a high-touch clientele and a senior injector to learn under for the first two years."],
+ ["Run a med spa within 5 years","Looking for a practice with a management track. Wants to own the schedule, the team, and eventually the P&L."],
+ ["Open an independent studio","Building toward a solo suite. Wants mentorship on compliance and medical direction along the way."],
+ ["Become a lead injector","Wants volume and variety. Aims to be the practice's most-requested injector within a year."],
+ ["Build a brand and inject","Content-forward career. Wants a practice that embraces filming, social, and personal brand building."],
+ ["Train future injectors","Long-term goal is education. Wants speaking, precepting, and training opportunities."]
+];
+const goalOf = i => goals[i%6];
+const availOf = i => i%3===0 ? ["Part time","20-25 hrs/wk"] : ["Full time","36-40 hrs/wk"];
+const shadowDays = i => 1 + (i%3);
+const settingOf = i => ["Med spa","Derm office","Plastics practice"][i%3];
 
 const modules = [
  "Facial anatomy and danger zones","Skin science and aging","Consultation and assessment","Photography and documentation",
@@ -442,8 +502,22 @@ grads.forEach((g,i)=>{
         <span>${actLabel(postsPerWk(i))} · ${postsPerWk(i)} posts/wk</span>
       </div>
     </div>
-    <div class="works">
-      ${labels.map((l,j)=>baTile(i,j,l,workCols[j],grad[1])).join('')}
+    <div class="photorow">
+      <div class="ph"><img src="images/nurses/n${i}_hs.jpg" alt="${first} headshot" loading="lazy" onerror="this.remove()"><small>Headshot</small></div>
+      <div class="ph"><svg class="fig" viewBox="0 0 24 44" fill="rgba(61,36,64,.32)" aria-hidden="true"><circle cx="12" cy="5.5" r="4.2"/><path d="M7 13.5c1.4-1.5 8.6-1.5 10 0 1.2 1.3 1.6 4.6 1.4 7.5l-1.6 8h-1.6l-.8 13h-4.8l-.8-13H7.2l-1.6-8c-.2-2.9.2-6.2 1.4-7.5z"/></svg><small>Full body</small></div>
+      <div class="ph"><img src="images/clients/c${(i*3)%60}_after.jpg" alt="Top Instagram post" loading="lazy" onerror="this.remove()"><small>Top post</small></div>
+    </div>
+    <div class="vibewrap">
+      <span class="arch">${archetypes[i%6][0]}</span>
+      ${vibesOf(i).map(v=>`<span class="vtag">${v}</span>`).join('')}
+    </div>
+    <div class="attrs">
+      ${attrsOf(i).slice(0,2).map(a=>`<div class="attr"><span class="an">${a[0]}</span><span class="abar"><i style="width:${a[1]}%"></i></span><span class="av">${a[1]}</span></div>`).join('')}
+    </div>
+    <div class="metarow">
+      <span class="mchip">Goal: ${goalOf(i)[0]}</span>
+      <span class="mchip ft">${availOf(i)[0]}</span>
+      <span class="mchip sh">Can shadow first</span>
     </div>
     <div class="kolrow">
       <span class="kolfaces">${nurseKols(i).map(k=>`<img src="${k[2]}" alt="${k[0]}" loading="lazy" onerror="this.remove()">`).join('')}</span>
@@ -553,16 +627,49 @@ function openProfile(i){
     </div>
 
     <div class="p-sec">
-      <h4>Trained with these KOLs</h4>
-      <div class="kolchips">
-        ${nurseKols(i).map(k=>`<span class="kolchip"><img src="${k[2]}" alt="" onerror="this.remove()"><b>${k[0]}</b><span>${k[1]}</span></span>`).join('')}
+      <h4>Culture &amp; vibe check</h4>
+      <div class="vibewrap">
+        <span class="arch">${archetypes[i%6][0]}</span>
+        ${vibesOf(i).map(v=>`<span class="vtag">${v}</span>`).join('')}
+      </div>
+      <p class="archdesc">${archetypes[i%6][1]} Personality assessment completed in module 3; verified by two live-clinic instructors.</p>
+    </div>
+
+    <div class="p-sec p-attrs">
+      <h4>Attributes</h4>
+      ${attrsOf(i).map(a=>`<div class="attr"><span class="an">${a[0]}</span><span class="abar"><i style="width:${a[1]}%"></i></span><span class="av">${a[1]}</span></div>`).join('')}
+    </div>
+
+    <div class="p-sec">
+      <h4>Photos</h4>
+      <div class="bigphotos">
+        <div class="ph"><img src="images/nurses/n${i}_hs.jpg" alt="${first} ${last} headshot" onerror="this.remove()"><small>Headshot</small></div>
+        <div class="ph"><svg class="fig" viewBox="0 0 24 44" fill="rgba(61,36,64,.32)" aria-hidden="true"><circle cx="12" cy="5.5" r="4.2"/><path d="M7 13.5c1.4-1.5 8.6-1.5 10 0 1.2 1.3 1.6 4.6 1.4 7.5l-1.6 8h-1.6l-.8 13h-4.8l-.8-13H7.2l-1.6-8c-.2-2.9.2-6.2 1.4-7.5z"/></svg><small>Full body</small></div>
       </div>
     </div>
 
     <div class="p-sec">
-      <h4>Recent work</h4>
-      <div class="p-works">
-        ${labels.map((l,j)=>baTile(i,j,l,workCols[j],grad[1])).join('')}
+      <h4>Career goals</h4>
+      <div class="goalbox">
+        <b>${goalOf(i)[0]}</b>
+        <span>${goalOf(i)[1]}</span>
+      </div>
+    </div>
+
+    <div class="p-sec">
+      <h4>Availability &amp; shadowing</h4>
+      <div class="availgrid">
+        <div class="availbox"><div class="lab">Hours</div><b>${availOf(i)[0]}, ${availOf(i)[1]}</b></div>
+        <div class="availbox"><div class="lab">Earliest start</div><b>Oct 13, after graduation</b></div>
+        <div class="availbox hl"><div class="lab">Shadowing</div><b>Yes, up to ${shadowDays(i)} day${shadowDays(i)>1?'s':''} before hire</b></div>
+        <div class="availbox"><div class="lab">Preferred setting</div><b>${settingOf(i)}</b></div>
+      </div>
+    </div>
+
+    <div class="p-sec">
+      <h4>Trained with these KOLs</h4>
+      <div class="kolchips">
+        ${nurseKols(i).map(k=>`<span class="kolchip"><img src="${k[2]}" alt="" onerror="this.remove()"><b>${k[0]}</b><span>${k[1]}</span></span>`).join('')}
       </div>
     </div>
 
